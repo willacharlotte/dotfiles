@@ -48,11 +48,11 @@ key[Control-Right]="${terminfo[kRIT5]}"
 # Finally, make sure the terminal is in application mode, when zle is
 # active. Only then are the values from $terminfo valid.
 if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
-	autoload -Uz add-zle-hook-widget
-	function zle_application_mode_start { echoti smkx }
-	function zle_application_mode_stop { echoti rmkx }
-	add-zle-hook-widget -Uz zle-line-init zle_application_mode_start
-	add-zle-hook-widget -Uz zle-line-finish zle_application_mode_stop
+  autoload -Uz add-zle-hook-widget
+  function zle_application_mode_start { echoti smkx }
+  function zle_application_mode_stop { echoti rmkx }
+  add-zle-hook-widget -Uz zle-line-init zle_application_mode_start
+  add-zle-hook-widget -Uz zle-line-finish zle_application_mode_stop
 fi
 
 # =================================
@@ -61,7 +61,6 @@ fi
 
 # ZVM_VI_HIGHLIGHT_FOREGROUND=black
 # ZVM_VI_HIGHLIGHT_BACKGROUND=white
-
 ZVM_VISUAL_LINE_MODE_CURSOR=ZVM_CURSOR_BEAM
 
 # =================================
@@ -72,21 +71,44 @@ ZVM_VISUAL_LINE_MODE_CURSOR=ZVM_CURSOR_BEAM
 COLOUR_OK='white'
 COLOUR_FAIL='red'
 COLOUR_DULL='008'
-LEADING_SYM='☾'
+LEADING_SYM='☾' 
+ZGP_STAGED_SYM='+'
+ZGP_UNSTAGED_SYM='!'
+ZGP_UNTRACKED_SYM='?'
 
-# TODO fix
-# VCS Info
-autoload -Uz vcs_info
 autoload -Uz add-zsh-hook
-add-zsh-hook precmd vcs_info
-zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:git*' formats "%b %m%c%u"
+
+# TODO probably a better way to do this...
+gen_git_message () {
+  [[ -f $ZDOTDIR/plugins/zsh-git-parse/zsh-git-parse.plugin.zsh ]] && source $ZDOTDIR/plugins/zsh-git-parse/zsh-git-parse.plugin.zsh
+
+  if [[ "$ZGP_IS_GIT" == true ]]; then
+    GIT_MESSAGE="on $ZGP_BRANCH"
+
+    if [[ $ZGP_STATUS_STAGED -ne 0 || $ZGP_STATUS_UNSTAGED -ne 0 || $ZGP_STATUS_UNTRACKED -ne 0 ]]; then
+      GIT_MESSAGE+=" |"
+      if [[ $ZGP_STATUS_STAGED -ne 0 ]]; then
+        GIT_MESSAGE+=" $ZGP_STATUS_STAGED$ZGP_STAGED_SYM"
+      fi
+      if [[ $ZGP_STATUS_UNSTAGED -ne 0 ]]; then
+        GIT_MESSAGE+=" $ZGP_STATUS_UNSTAGED$ZGP_UNSTAGED_SYM"
+      fi
+      if [[ $ZGP_STATUS_UNTRACKED -ne 0 ]]; then
+        GIT_MESSAGE+=" $ZGP_STATUS_UNTRACKED$ZGP_UNTRACKED_SYM"
+      fi
+    fi
+  else
+    GIT_MESSAGE=''
+  fi
+}
+
+add-zsh-hook precmd gen_git_message
 
 setopt prompt_subst
 
 # Prompt Definitions
 PS1="%F{$COLOUR_DULL}%~%f %B%(?.%F{$COLOUR_OK}$LEADING_SYM%f.%F{$COLOUR_FAIL}$LEADING_SYM%f)%b "
-RPS1='%F{$COLOUR_DULL}${vcs_info_msg_0_}%f'
+RPS1='%F{$COLOUR_DULL}$GIT_MESSAGE%f'
 
 # =================================
 # Misc config
