@@ -7,5 +7,5 @@ alias gitd="git diff"
 alias clip="xclip -r -selection c"
 alias nv="nvim"
 alias vim="nvim"
-alias jc="jack_control"
+alias pacman="pacman --color=auto"
 
