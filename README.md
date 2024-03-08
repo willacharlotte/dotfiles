@@ -4,9 +4,11 @@
 A collection of configurations for my systems
 
 ## Prerequisites
-- a cpp compiler
+- a c compiler
 - make 
 - zsh
+- zsh-syntax-highlighting
+- neofetch
 - nvim
 
 ## Setup
