@@ -79,36 +79,36 @@ ZGP_UNTRACKED_SYM='?'
 autoload -Uz add-zsh-hook
 
 # TODO probably a better way to do this...
-gen_git_message () {
-  [[ -f $ZDOTDIR/plugins/zsh-git-parse/zsh-git-parse.plugin.zsh ]] && source $ZDOTDIR/plugins/zsh-git-parse/zsh-git-parse.plugin.zsh
+#gen_git_message () {
+  #[[ -f $ZDOTDIR/plugins/zsh-git-parse/zsh-git-parse.plugin.zsh ]] && source $ZDOTDIR/plugins/zsh-git-parse/zsh-git-parse.plugin.zsh
+#
+#  if [[ "$ZGP_IS_GIT" == true ]]; then
+#    GIT_MESSAGE="on $ZGP_BRANCH"
+#
+#    if [[ $ZGP_STATUS_STAGED -ne 0 || $ZGP_STATUS_UNSTAGED -ne 0 || $ZGP_STATUS_UNTRACKED -ne 0 ]]; then
+#      GIT_MESSAGE+=" |"
+#      if [[ $ZGP_STATUS_STAGED -ne 0 ]]; then
+#        GIT_MESSAGE+=" $ZGP_STATUS_STAGED$ZGP_STAGED_SYM"
+#      fi
+#      if [[ $ZGP_STATUS_UNSTAGED -ne 0 ]]; then
+#        GIT_MESSAGE+=" $ZGP_STATUS_UNSTAGED$ZGP_UNSTAGED_SYM"
+#      fi
+#      if [[ $ZGP_STATUS_UNTRACKED -ne 0 ]]; then
+#        GIT_MESSAGE+=" $ZGP_STATUS_UNTRACKED$ZGP_UNTRACKED_SYM"
+#      fi
+#    fi
+#  else
+#    GIT_MESSAGE=''
+#  fi
+#}
 
-  if [[ "$ZGP_IS_GIT" == true ]]; then
-    GIT_MESSAGE="on $ZGP_BRANCH"
-
-    if [[ $ZGP_STATUS_STAGED -ne 0 || $ZGP_STATUS_UNSTAGED -ne 0 || $ZGP_STATUS_UNTRACKED -ne 0 ]]; then
-      GIT_MESSAGE+=" |"
-      if [[ $ZGP_STATUS_STAGED -ne 0 ]]; then
-        GIT_MESSAGE+=" $ZGP_STATUS_STAGED$ZGP_STAGED_SYM"
-      fi
-      if [[ $ZGP_STATUS_UNSTAGED -ne 0 ]]; then
-        GIT_MESSAGE+=" $ZGP_STATUS_UNSTAGED$ZGP_UNSTAGED_SYM"
-      fi
-      if [[ $ZGP_STATUS_UNTRACKED -ne 0 ]]; then
-        GIT_MESSAGE+=" $ZGP_STATUS_UNTRACKED$ZGP_UNTRACKED_SYM"
-      fi
-    fi
-  else
-    GIT_MESSAGE=''
-  fi
-}
-
-add-zsh-hook precmd gen_git_message
+#add-zsh-hook precmd gen_git_message
 
 setopt prompt_subst
 
 # Prompt Definitions
 PS1="%F{$COLOUR_DULL}%~%f %B%(?.%F{$COLOUR_OK}$LEADING_SYM%f.%F{$COLOUR_FAIL}$LEADING_SYM%f)%b "
-RPS1='%F{$COLOUR_DULL}$GIT_MESSAGE%f'
+#RPS1='%F{$COLOUR_DULL}$GIT_MESSAGE%f'
 
 # =================================
 # Misc config
@@ -146,7 +146,7 @@ unsetopt BEEP
 zle_highlight=('paste:none')
 
 # syntax highlighting: needs to be last
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOME/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # =================================
 # Cursors
