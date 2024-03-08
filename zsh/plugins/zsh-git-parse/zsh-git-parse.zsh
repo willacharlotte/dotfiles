@@ -23,7 +23,7 @@ unset STATUS_RAW
 # calculate ZGP_STATUS_* values 
 for STATUS in "${STATUSES[@]}";
 do
-  local CODE="${STATUS::2}"
+  local CODE=$(echo $STATUS | cut -c 1-2)
   if [[ $CODE =~ ^[[:space:]].$ ]]; then
     ZGP_STATUS_UNSTAGED+=1
   fi
