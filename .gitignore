@@ -6,3 +6,6 @@
 !/zsh
 !/nvim
 
+# But also
+.zcompdump
+
