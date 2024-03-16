@@ -7,5 +7,6 @@
 !/nvim
 
 # But also
-.zcompdump
+/zsh/.zcompdump
+/nvim/lazy-lock.json
 
