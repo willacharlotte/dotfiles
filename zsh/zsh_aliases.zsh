@@ -9,3 +9,6 @@ alias nv="nvim"
 alias vim="nvim"
 alias pacman="pacman --color auto"
 
+# windows only
+alias cdw="cd /mnt/c/Users/bbdnet2840/"
+

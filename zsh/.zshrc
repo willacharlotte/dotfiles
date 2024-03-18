@@ -144,6 +144,10 @@ unsetopt BEEP
 # remove hightlight on pastes
 zle_highlight=('paste:none')
 
+# This loads nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
 # syntax highlighting: needs to be last
 source $HOME/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
