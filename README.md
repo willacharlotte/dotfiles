@@ -9,6 +9,7 @@ A collection of configurations for my systems
 - zsh
 - neofetch
 - nvim
+- ripgrep (telescope dep)
 
 ## Setup
 - clone repo to $HOME/.config
