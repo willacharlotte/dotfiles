@@ -19,3 +19,9 @@ A collection of configurations for my systems
     * `git pull origin main --allow-unrelated-histories`
 - init submodules with `git submodule update --init --recursive`
 - add `ZDOTDIR=~/.config/zsh` to /etc/zsh/zshenv (create if doesn't exist)
+
+## Windows config
+- copy alacritty/ to %APPDATA%/alacritty/
+
+## TODO
+- find a way to symlink %APPDATA%/alacritty/ to alacritty/
