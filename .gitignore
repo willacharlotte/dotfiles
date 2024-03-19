@@ -2,9 +2,9 @@
 /*
 
 # Except
-!/.gitignore
 !/zsh
 !/nvim
+!/alacritty
 
 # But also
 /zsh/.zcompdump
